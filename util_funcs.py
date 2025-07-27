@@ -18,7 +18,7 @@ def check_args(args):
     :param args: аргументы командной строки
     """
     # Проверка на существование файлов
-    missing = [f for f in args.files if not os.path.exists(f)]
+    missing = [f for f in args.file if not os.path.exists(f)]
     if missing:
         print(f"Файл(-ы) не существуют: {', '.join(missing)}", file=sys.stderr)
         sys.exit(1)
@@ -44,7 +44,7 @@ def parse_args():
     :return: аргументы командной строки
     """
     parser = argparse.ArgumentParser(description="Генератор отчета по логам")
-    parser.add_argument('--files', type=str, nargs='+', required=True, help='Путь до лога(-ов)')
+    parser.add_argument('--file', type=str, nargs='+', required=True, help='Путь до лога(-ов)')
     parser.add_argument('--report', type=str, choices=ALLOWED_REPORTS, required=True, help='Тип отчета')
     parser.add_argument('--date', type=str, help='Дата в формате YYYY-MM-DD (фильтрация по дате)')
 

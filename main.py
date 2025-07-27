@@ -90,7 +90,7 @@ def main():
     args = parse_args()
 
     # Чтение логов из всех файлов в один через генератор (lazy, не использует всю память сразу)
-    log_lines = chain.from_iterable(read_logs(file_path) for file_path in args.files)
+    log_lines = chain.from_iterable(read_logs(file_path) for file_path in args.file)
 
     # Генерация отчета
     report = generate_average_report(log_lines, filter_date=args.date)

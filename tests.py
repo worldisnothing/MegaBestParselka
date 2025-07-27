@@ -12,7 +12,7 @@ def test_check_args_with_valid_args():
     Не должно быть исключений
     """
     args = argparse.Namespace(
-        files=['existing_file.log'],
+        file=['existing_file.log'],
         report='average',
         date='2025-06-22'
     )
@@ -28,7 +28,7 @@ def test_check_args_with_missing_file():
     Ошибка, файл отсутствует, выход из программы
     """
     args = argparse.Namespace(
-        files=['missing_file.log'],
+        file=['missing_file.log'],
         report='average',
         date=None
     )
@@ -45,7 +45,7 @@ def test_check_args_with_invalid_report():
     Ошибка, недопустимый тип отчета, выход из программы
     """
     args = argparse.Namespace(
-        files=['existing_file.log'],
+        file=['existing_file.log'],
         report='invalid_report',
         date=None
     )
@@ -62,7 +62,7 @@ def test_check_args_with_invalid_date():
     Ошибка, неверный формат даты, выход из программы
     """
     args = argparse.Namespace(
-        files=['existing_file.log'],
+        file=['existing_file.log'],
         report='average',
         date='2025-14-22'  # Неверный месяц
     )
@@ -79,7 +79,7 @@ def test_parse_args_valid():
     Ожидаем, что все ок
     """
     test_args = [
-        '--files', 'file1.log', 'file2.log',
+        '--file', 'file1.log', 'file2.log',
         '--report', 'average',
         '--date', '2025-06-22'
     ]
@@ -87,7 +87,7 @@ def test_parse_args_valid():
     with patch('sys.argv', ['main.py'] + test_args):
         with patch('os.path.exists', return_value=True):
             args = parse_args()
-            assert args.files == ['file1.log', 'file2.log']
+            assert args.file == ['file1.log', 'file2.log']
             assert args.report == 'average'
             assert args.date == '2025-06-22'
 
@@ -206,7 +206,7 @@ def test_main_with_sample_data(capsys):
     """
     test_args = [
         'main.py',
-        '--files', 'example1.log',
+        '--file', 'example1.log',
         '--report', 'average'
     ]
 
